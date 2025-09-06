@@ -82,21 +82,104 @@ if(e.key==="h"){
   }
 });
 
+//-------------------------SCROLL EVENT-----------------------------
+//------------------------------------------------------------------
+
+const nav =document.querySelector("nav");
+
+window.addEventListener('scroll',() =>{
+if (window.scrollY >120){
+  nav.style.top ="0";
+}else {
+  nav.style.top ="-50px";
+}
+});
+
+//---------------------------FORMS EVENTS------------------------------
+//---------------------------------------------------------------------
+
+const inputName =document.querySelector('input[type="text"]');
+const select = document.querySelector("select");
+const form = document.querySelector("form");
 
 
+let pseudo ="";
+let language ="";
 
+inputName.addEventListener("input",(e)=>{
+  pseudo = e.target.value;
+});
 
+select.addEventListener("input", (e) =>{
+  language = e.target.value;
+});
 
+form.addEventListener("submit", (e)=>{
+  e.preventDefault();
+ 
+  if(cgv.checked){
+    document.querySelector("form > div").innerHTML=`
+    <h3>pseudo: ${pseudo}</h3>
+    <h4>language: ${language}</h4>
+    `;
+  }else{
+    alert("veuiller accepter les CGV");
+  }
+});
 
+//-------------------------LOAD EVENT------------------------------
+//-----------------------------------------------------------------
 
+// window.addEventListener("load", ()=>{
+  
+// });
 
+//---------------------SELECTION MULTIPLE-----------------------------
+//----------------------FOREACH (POUR CHACUN)-------------------------
 
+const boxes = document.querySelectorAll(".box");
+boxes.forEach((box) => {
+  box.addEventListener("click", (e)=>{
+    e.target.style.transform ="scale(0.7)";
+  });
+});
 
+//-------------------addEventListener VS Onclick-----------------------
+//---------------------------------------------------------------------
+//Le probleme est que je peux plus y rattacher un autre evenement
 
+// document.body.onclick=()=>{
 
+// };
+//-----------------USECAPTURE ET BUBBLING------------------------------
+//----------------------------------------------------------------------
+// ----------------------BUBBLING--------------------------------------
+// bubblinh => fin (de base l'ecouyeur est parametré en mode bubbling)
 
+Document.body.addEventListener("click", ()=>{
 
+}, false);
 
+//----------------- USECAPTURE----------------------------------------
+// evenement se declenche au debut
+Document.body.addEventListener("click", ()=>{
 
+}, true);
 
+//----------------------STOP PROPAGATION-----------------------------------
+//-------------------------------------------------------------------------
+bd.addEventListener("click", (e) =>{
 
+alert("test");
+e.stopPropagation();
+});
+
+// -----------REMOVEEVENTLISTNER---------------------------------------
+// utiliser si on veut enlever l'ecouteur.
+
+//------------------------------BOM------------------------------------
+//----------------------browser object model----------------------------
+
+console.log(window.innerHeight);
+console.log(window.innerWidth);
+console.log(window.scroll);
